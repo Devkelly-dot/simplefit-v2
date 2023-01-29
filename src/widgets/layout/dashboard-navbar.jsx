@@ -26,12 +26,17 @@ import {
   setOpenSidenav,
 } from "@/context";
 
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
 
+  const userName = useSelector((state)=>state.auth.username);
+  
   return (
     <Navbar
       color={fixedNavbar ? "white" : "transparent"}
@@ -83,14 +88,14 @@ export function DashboardNavbar() {
           >
             <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
           </IconButton>
-          <Link to="/auth/sign-in">
+          {userName?<Link to="profile">
             <Button
               variant="text"
               color="blue-gray"
               className="hidden items-center gap-1 px-4 xl:flex"
             >
               <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-              Sign In
+                {userName}
             </Button>
             <IconButton
               variant="text"
@@ -99,7 +104,24 @@ export function DashboardNavbar() {
             >
               <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
             </IconButton>
-          </Link>
+          </Link>:
+          <Link to="/auth/sign-in">
+            <Button
+              variant="text"
+              color="blue-gray"
+              className="hidden items-center gap-1 px-4 xl:flex"
+            >
+              <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
+                Sign In
+            </Button>
+            <IconButton
+              variant="text"
+              color="blue-gray"
+              className="grid xl:hidden"
+            >
+              <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
+            </IconButton>
+          </Link>}
           <IconButton
             variant="text"
             color="blue-gray"

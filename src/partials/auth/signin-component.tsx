@@ -4,13 +4,37 @@ import { authFetch } from "@/common/authFetch";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuth } from "./authSlice";
+import AlertList from "../alertList";
 
 interface Props {
+}
+
+type alert = {
+  text: string,
+  className: string,
+  show: boolean,
 }
 
 const SigninComponent: React.FC<Props> = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [alerts, setAlerts] = useState<alert[]>([
+      {
+        text: 'alert test',
+        className: 'bg-red-500',
+        show: true
+      },
+      {
+        text: 'alert test 1',
+        className: 'bg-red-500',
+        show: true
+      },
+      {
+        text: 'alert test 2',
+        className: 'bg-red-500',
+        show: true
+      }
+    ]);
 
     const [form, setForm] = useState(
         {
@@ -23,30 +47,35 @@ const SigninComponent: React.FC<Props> = () => {
 
     async function loginAttempt()
     {
-        const res = await authFetch('POST',{},'dayplan/users/login/',form);
-        const authToken = res?.token;
+        try {
+          const res = await authFetch('POST',{},'dayplan/users/login/',form);
+          const authToken = res?.token;
 
-        if(res.Error)
-        {
-            console.log(res.Error)
-            return;
+          if(res.Error)
+          {
+              console.log(res.Error)
+              return;
+          }
+
+
+          dispatch(setAuth(
+              {
+                  username: form['username'],
+                  token: authToken,
+                  userID: null
+              }
+          ))
+
+          if(rememberMe)
+          {
+              localStorage.setItem('authToken', authToken);
+              localStorage.setItem('userName', form['username']);
+          }
+
+          navigate('/dashboard/home');
+        } catch (error) {
+          console.error("something wrong with request: ",error)
         }
-
-
-        dispatch(setAuth(
-            {
-                username: res[0]?.username,
-                token: authToken,
-                userID: null
-            }
-        ))
-
-        if(rememberMe)
-        {
-            localStorage.setItem('authToken', authToken);
-        }
-
-        navigate('/dashboard/home');
     }
 
     function handleFormChange(e,key:string)
@@ -54,6 +83,11 @@ const SigninComponent: React.FC<Props> = () => {
         let new_input = {};
         new_input[key] = e.target.value;
         setForm({...form,...new_input});
+    }
+
+    function removeAlert(index)
+    {
+        setAlerts((prevAlerts)=>prevAlerts.filter((_,i)=>i!==index));
     }
 
     return(
@@ -67,8 +101,10 @@ const SigninComponent: React.FC<Props> = () => {
               Sign In
             </Typography>
           </CardHeader>
+
           <CardBody className="flex flex-col gap-4">
-            <Input type="email" label="Email" size="lg" value={form['username']} onChange={(e)=>handleFormChange(e,'username')}/>
+            <AlertList alerts = {alerts} removeAlert={removeAlert}/>
+            <Input type="username" label="Username" size="lg" value={form['username']} onChange={(e)=>handleFormChange(e,'username')}/>
             <Input type="password" label="Password" size="lg" value={form['password']} onChange={(e)=>handleFormChange(e,'password')}/>
             <div className="-ml-2.5">
               <Checkbox label="Remember Me" checked={rememberMe} onChange={(e)=>setRememberMe(e.target.checked)}/>
