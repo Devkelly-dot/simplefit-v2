@@ -5,10 +5,10 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 
 type alert = {
+    id: number
     text: string,
     className: string,
-    show: boolean,
-}
+  }
 
 interface Props {
     alerts: alert[];
@@ -16,27 +16,21 @@ interface Props {
 }
 
 const AlertList: React.FC<Props> = ({alerts, removeAlert}) => {
-    useEffect(()=>{
-        console.log(alerts)
-        console.log(alerts[0]?.text)
-    }, [alerts])
-
     return (
     <>
     {
         alerts?.map((alert, index)=>{
             return <>
             {
-                alert.show?
                 <Alert 
                 className={alert.className}
-                key = {`${index}:${alert.text}`}
+                key = {`${index}alert:${alert.id}`}
                 dismissible={{
                     onClose: () =>
                       removeAlert(index),
                   }}>
                     {alert.text}
-                </Alert>:<></>
+                </Alert>
             }
             </>
         })

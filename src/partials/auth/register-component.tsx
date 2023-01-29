@@ -4,13 +4,21 @@ import { authFetch } from "@/common/authFetch";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuth } from "./authSlice";
+import AlertList from "../alertList";
 
 interface Props {
+}
+
+type alert = {
+  id: number
+  text: string,
+  className: string,
 }
 
 const RegisterComponent: React.FC<Props> = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [alerts, setAlerts] = useState<alert[]>([]);
 
     const [form, setForm] = useState(
         {
@@ -21,14 +29,30 @@ const RegisterComponent: React.FC<Props> = () => {
     )
     async function registerAttempt()
     {
-        const res = await authFetch('POST',{},'dayplan/users/register/',form);
+      try{
+        const submit_form = {}
+
+        for (const key in form) {
+          if (form[key] !== '') {
+          submit_form[key] = form[key];
+          }
+        }
+
+        const res = await authFetch('POST',{},'dayplan/users/register/',submit_form);
         const loginForm = {
             username:res[0]?.username,
             password:form?.password
         }
         if(res.Error)
         {
-            console.log(res.Error)
+            setAlerts([
+              {
+                id: Math.random(),
+                text: res.Error,
+                className: 'bg-red-400'
+              }
+            ])
+
             return;
         }
 
@@ -44,6 +68,16 @@ const RegisterComponent: React.FC<Props> = () => {
         ))
         
         navigate('/dashboard/home')
+      } catch (error) {
+        console.error("something wrong with request: ",error)
+          setAlerts([
+          {
+            id: Math.random(),
+            text: "Something went wrong with registration, please try different credentials",
+            className: 'bg-red-400'
+          }
+          ])
+      }
     }
 
     function handleFormChange(e,key:string)
@@ -51,6 +85,11 @@ const RegisterComponent: React.FC<Props> = () => {
         let new_input = {};
         new_input[key] = e.target.value;
         setForm({...form,...new_input});
+    }
+
+    function removeAlert(index)
+    {
+        setAlerts((prevAlerts)=>prevAlerts.filter((_,i)=>i!==index));
     }
 
     return(
@@ -67,6 +106,7 @@ const RegisterComponent: React.FC<Props> = () => {
 
 
             <CardBody className="flex flex-col gap-4">
+                <AlertList alerts = {alerts} removeAlert={removeAlert}/>
                 <Input label="Username" size="lg" value={form['username']} onChange={(e)=>handleFormChange(e,'username')} required={true}/>
                 <Input type="email" label="Email" size="lg" value = {form['email']} onChange={(e)=>handleFormChange(e,'email')} required={true}/>
                 <Input type="password" label="Password" size="lg" value={form['password']} onChange={(e)=>handleFormChange(e,'password')} required={true}/>

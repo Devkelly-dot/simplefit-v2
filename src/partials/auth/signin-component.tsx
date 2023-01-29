@@ -10,31 +10,15 @@ interface Props {
 }
 
 type alert = {
+  id: number
   text: string,
   className: string,
-  show: boolean,
 }
 
 const SigninComponent: React.FC<Props> = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [alerts, setAlerts] = useState<alert[]>([
-      {
-        text: 'alert test',
-        className: 'bg-red-500',
-        show: true
-      },
-      {
-        text: 'alert test 1',
-        className: 'bg-red-500',
-        show: true
-      },
-      {
-        text: 'alert test 2',
-        className: 'bg-red-500',
-        show: true
-      }
-    ]);
+    const [alerts, setAlerts] = useState<alert[]>([]);
 
     const [form, setForm] = useState(
         {
@@ -54,6 +38,13 @@ const SigninComponent: React.FC<Props> = () => {
           if(res.Error)
           {
               console.log(res.Error)
+              setAlerts([
+                {
+                  id: Math.random(),
+                  text: res.Error,
+                  className: 'bg-red-400'
+                }
+              ])
               return;
           }
 
@@ -75,6 +66,13 @@ const SigninComponent: React.FC<Props> = () => {
           navigate('/dashboard/home');
         } catch (error) {
           console.error("something wrong with request: ",error)
+          setAlerts([
+            {
+              id: Math.random(),
+              text: "Couldn't login with provided credentials",
+              className: 'bg-red-400'
+            }
+          ])
         }
     }
 
