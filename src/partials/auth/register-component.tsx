@@ -1,5 +1,5 @@
 import { Card, CardHeader, Typography, Input, CardBody, Checkbox, CardFooter, Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authFetch } from "@/common/authFetch";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ interface Props {
 
 const RegisterComponent: React.FC<Props> = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [form, setForm] = useState(
         {
@@ -41,6 +42,8 @@ const RegisterComponent: React.FC<Props> = () => {
                 userID: res[0]?.id
             }
         ))
+        
+        navigate('/dashboard/home')
     }
 
     function handleFormChange(e,key:string)
