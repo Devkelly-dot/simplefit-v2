@@ -1,0 +1,21 @@
+import { getDayName } from "@/common/dayplanScripts";
+import { Card, CardBody } from "@material-tailwind/react";
+import { dayplanSummary } from "../dayplanSlice";
+
+type Props = {
+    dayplan:dayplanSummary;
+};
+
+const SummaryComponent: React.FC<Props> = ({dayplan}) => {
+    const day_name = getDayName(dayplan.day);
+    return (
+        <Card>
+            <CardBody>
+                <h2 className="text-lg">{day_name}</h2>
+                <h3>{dayplan.eaten} / {dayplan.goal} calories</h3>
+            </CardBody>
+        </Card>
+    );
+};
+
+export default SummaryComponent;

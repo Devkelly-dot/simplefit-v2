@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type dayplanSummary = {
+export type dayplanSummary = {
     id: number,
     day: string,
     goal: number,

@@ -19,7 +19,6 @@ export async function loginUser(username, token, id, remember, dispatch)
     }
 
     const summaries = await getSummaries(token);
-    console.log(summaries)
     summaries.forEach(summary => {
         dispatch(setSummary(
             {

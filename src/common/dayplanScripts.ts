@@ -30,3 +30,18 @@ export async function getSummaries(token:string)
 
     return summaries;
 }
+
+export function getDayName(day:string)
+{
+    const dict = {
+        "SU": "Sunday",
+        "MO": "Monday",
+        "TU": "Tuesday",
+        "WE": "Wednesday",
+        "TH": "Thursday",
+        "FR": "Friday",
+        "SA": "Saturday"
+    }
+
+    return dict[day];
+}
