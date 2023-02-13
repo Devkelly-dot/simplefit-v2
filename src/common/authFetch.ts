@@ -1,8 +1,7 @@
 export function authFetch(request_type = "GET", headers = {}, endpoint, body) {
     const defaultHeaders = { "Content-Type": "application/json" };
     const finalHeaders = { ...defaultHeaders, ...headers };
-    const final_endpoint = String(import.meta.env.VITE_API_ENDPOINT) + endpoint;
-
+    const final_endpoint = String(import.meta.env.VITE_BASE_URL) + endpoint;
 
     return fetch(final_endpoint, {
       method: request_type,
