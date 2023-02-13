@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuth } from "./authSlice";
 import AlertList from "../alertList";
+import { loginUser } from "@/common/login";
 
 interface Props {
 }
@@ -48,20 +49,7 @@ const SigninComponent: React.FC<Props> = () => {
               return;
           }
 
-
-          dispatch(setAuth(
-              {
-                  username: form['username'],
-                  token: authToken,
-                  userID: null
-              }
-          ))
-
-          if(rememberMe)
-          {
-              localStorage.setItem('authToken', authToken);
-              localStorage.setItem('userName', form['username']);
-          }
+          loginUser(form['username'], authToken, null, rememberMe, dispatch);
 
           navigate('/dashboard/home');
         } catch (error) {

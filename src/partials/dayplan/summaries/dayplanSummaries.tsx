@@ -7,17 +7,12 @@ type Props = {
 };
 
 const DayplanSummaries: React.FC<Props> = ({}) => {
-    const token = useSelector((state:RootState)=>state.auth.token);
+    const dayplans = useSelector((state:RootState)=>state.dayplan.dayplanSummaries);
 
     useEffect(()=>{
-        async function fetchDayplans()
-        {
-            let summaries = await getSummaries(token);
-            console.log(summaries);
-        }
-        if(token)
-            fetchDayplans();
-    },[token])
+        console.log(dayplans)
+    },[dayplans])
+
     return (
         <div>
         </div>

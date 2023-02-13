@@ -56,7 +56,50 @@ const initialDayplan = {
     cardio: []
 }
 const initialState:DayplanState = {
-    dayplanSummaries: [],
+    dayplanSummaries: [
+        {
+            id: -1,
+            day: "SU",
+            goal: 0,
+            eaten: 0
+        },
+        {
+            id: -2,
+            day: "MO",
+            goal: 0,
+            eaten: 0
+        },
+        {
+            id: -3,
+            day: "TU",
+            goal: 0,
+            eaten: 0
+        },
+        {
+            id: -4,
+            day: "WE",
+            goal: 0,
+            eaten: 0
+        },
+        {
+            id: -5,
+            day: "TH",
+            goal: 0,
+            eaten: 0
+        },
+        {
+            id: -6,
+            day: "FR",
+            goal: 0,
+            eaten: 0
+        },
+        {
+            id: -7,
+            day: "SA",
+            goal: 0,
+            eaten: 0
+        }
+    ],
     selectedDayplan: initialDayplan
 }
 
@@ -65,10 +108,10 @@ export const dayplanSlice = createSlice(
         name:'dayplan',
         initialState,
         reducers: {
-            setSummary: (state, action: PayloadAction<{ id: number, summary: {goal?: number, eaten?: number} }>) => {
-                const { id, summary } = action.payload;
+            setSummary: (state, action: PayloadAction<{ day: string, summary: {id?:number, goal?: number, eaten?: number} }>) => {
+                const { day, summary } = action.payload;
                 const dayplanSummaries = state.dayplanSummaries.map(dpSummary => {
-                  if (dpSummary.id === id) {
+                  if (dpSummary.day === day) {
                     return { ...dpSummary, ...summary };
                   }
                   return dpSummary;

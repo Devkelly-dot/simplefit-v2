@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import authReducer from '../partials/auth/authSlice'
+import authReducer from '../partials/auth/authSlice';
+import dayplanReducer from '../partials/dayplan/dayplanSlice';
 
 export const store = configureStore({
   reducer: {
     auth:authReducer,
+    dayplan:dayplanReducer
   },
 });
 
