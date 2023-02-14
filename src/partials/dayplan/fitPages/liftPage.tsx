@@ -2,6 +2,7 @@ import { RootState } from "@/app/store";
 import { Card, CardBody } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import LiftCard from "./liftCard";
 
 type Props = {
 };
@@ -20,14 +21,7 @@ const LiftPage: React.FC<Props> = () => {
                 objects.map((object)=>{
                  return(
                     <li key={object.id}>
-                        <Card>
-                            <CardBody>
-                                <h2>{object.name} {object.reps} reps</h2>
-                                <h3>{object.weight} {object.measurement}</h3>
-                                <h3>{object.complete} / {object.goal} sets</h3>
-                                <h3>{object.description}</h3>
-                            </CardBody>
-                        </Card>
+                        <LiftCard lift={object}/>
                     </li>
                  )   
                 })
