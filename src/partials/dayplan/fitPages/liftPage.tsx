@@ -2,6 +2,7 @@ import { RootState } from "@/app/store";
 import { Card, CardBody } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import FitList from "./fitList";
 import LiftCard from "./liftCard";
 
 type Props = {
@@ -16,17 +17,10 @@ const LiftPage: React.FC<Props> = () => {
     },[selected_dayplan]);
 
     return(
-        <ul className="flex flex-col gap-4">
-           {
-                objects.map((object)=>{
-                 return(
-                    <li key={object.id}>
-                        <LiftCard lift={object}/>
-                    </li>
-                 )   
-                })
-           } 
-        </ul>
+        <FitList 
+        fitType="lift"
+        cardComponent={(object)=><LiftCard lift={object}/>}
+        />
     )
 }
 
