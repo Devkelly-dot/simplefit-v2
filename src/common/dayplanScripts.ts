@@ -1,3 +1,4 @@
+import { updateSelectedDayplan } from "@/partials/dayplan/dayplanSlice";
 import { authFetch } from "./authFetch"
 
 export async function getDayplans(token:string)
@@ -66,4 +67,29 @@ export async function getDayplanDetails(token, id)
     }
 
     return new_dayplan;
+}
+
+export async function createFitObject(dispatch, dayplanId, token, type, object)
+{
+    let new_object = {};
+
+    if(object.id === -1)
+    {
+        const apiURL = `dayplan/dayplans/${dayplanId}/${type}/`
+        const res = await authFetch('POST', {'Authorization':'Token '+token}, apiURL, object)
+        console.log(res);
+        new_object = res[0];
+    }
+    else 
+    {
+
+    }
+
+    dispatch(updateSelectedDayplan(
+        {
+            type: 'lift',
+            id: new_object['id'],
+            new_object: new_object
+        }
+    ))
 }

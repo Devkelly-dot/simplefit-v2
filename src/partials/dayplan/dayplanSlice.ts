@@ -124,14 +124,22 @@ export const dayplanSlice = createSlice(
             },
             updateSelectedDayplan: (state, action: PayloadAction<{type: string, id: number, new_object:any}>) => {
                 const {type, id, new_object} = action.payload;
-                let new_objects = {...state.selectedDayplan[type]}
+                let new_dayplan = {...state.selectedDayplan}
+                let new_objects = new_dayplan[type]
+                let new_flag = true;
+
                 for(let i in new_objects)
                 {
                     if(new_objects[i].id === id)
                     {
                         new_objects[i] = new_object;
+                        new_flag = false;
+                        break;
                     }
                 }
+                
+                if(new_flag)
+                    new_objects.push(new_object);
 
                 state.selectedDayplan = {...state.selectedDayplan, [type]:new_objects}
             },
