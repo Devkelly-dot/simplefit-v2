@@ -1,5 +1,6 @@
 import { getDayName } from "@/common/dayplanScripts";
 import { Card, CardBody } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 import { dayplanSummary } from "../dayplanSlice";
 
 type Props = {
@@ -9,12 +10,14 @@ type Props = {
 const SummaryComponent: React.FC<Props> = ({dayplan}) => {
     const day_name = getDayName(dayplan.day);
     return (
-        <Card>
-            <CardBody>
-                <h2 className="text-lg">{day_name}</h2>
-                <h3>{dayplan.eaten} / {dayplan.goal} calories</h3>
-            </CardBody>
-        </Card>
+        <Link to={`/dashboard/${dayplan.day}/lift`}>
+            <Card>
+                <CardBody>
+                    <h2 className="text-lg">{day_name}</h2>
+                    <h3>{dayplan.eaten} / {dayplan.goal} calories</h3>
+                </CardBody>
+            </Card>
+        </Link>
     );
 };
 

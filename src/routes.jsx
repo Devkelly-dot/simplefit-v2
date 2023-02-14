@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
+import DayplanPage from "./pages/dashboard/dayplanPage";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -24,22 +25,46 @@ export const routes = [
         element: <Home />,
       },
       {
-        icon: <UserCircleIcon {...icon} />,
-        name: "profile",
-        path: "/profile",
-        element: <Profile />,
+        name: "sunday",
+        path: "/SU/:type",
+        element: <DayplanPage
+          day="SU"/>,
       },
       {
-        icon: <TableCellsIcon {...icon} />,
-        name: "tables",
-        path: "/tables",
-        element: <Tables />,
+        name: "monday",
+        path: "/MO/:type",
+        element: <DayplanPage
+          day="MO"/>,
       },
       {
-        icon: <BellIcon {...icon} />,
-        name: "notifactions",
-        path: "/notifactions",
-        element: <Notifications />,
+        name: "tuesday",
+        path: "/TU/:type",
+        element: <DayplanPage
+          day="TU"/>,
+      },
+      {
+        name: "wednesday",
+        path: "/WE/:type",
+        element: <DayplanPage
+          day="WE"/>,
+      },
+      {
+        name: "thursday",
+        path: "/TH/:type",
+        element: <DayplanPage
+          day="TH"/>,
+      },
+      {
+        name: "friday",
+        path: "/FR/:type",
+        element: <DayplanPage
+          day="FR"/>,
+      },
+      {
+        name: "saturday",
+        path: "/SA/:type",
+        element: <DayplanPage
+          day="SA"/>,
       },
     ],
   },

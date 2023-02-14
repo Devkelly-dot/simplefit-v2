@@ -45,3 +45,25 @@ export function getDayName(day:string)
 
     return dict[day];
 }
+
+export async function fetchDayplanDetails(token, id)
+{
+    const apiURL = `dayplan/dayplans/${id}/view/`
+    const res = await authFetch('GET', {'Authorization':'Token '+token}, apiURL, {});
+    return res; 
+}
+
+export async function getDayplanDetails(token, id)
+{
+    const res = await fetchDayplanDetails(token, id);
+    const new_dayplan = {
+        id: res.dayplan[0].id,
+        day: res.dayplan[0].day,
+        goal: res.dayplan[0].goal,
+        food: res.food,
+        lift: res.lift,
+        cardio: res.cardio
+    }
+
+    return new_dayplan;
+}

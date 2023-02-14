@@ -29,6 +29,7 @@ export type cardioType = {
     id: number,
     name: string,
     description: string,
+    complete: number,
     goal: number,
     measurement: string 
 }
@@ -117,10 +118,26 @@ export const dayplanSlice = createSlice(
                   return dpSummary;
                 });
                 state.dayplanSummaries = dayplanSummaries;
-            }
+            },
+            setSelectedDayplan: (state, action: PayloadAction<dayplanDetail>) => {
+                state.selectedDayplan = action.payload;
+            },
+            updateSelectedDayplan: (state, action: PayloadAction<{type: string, id: number, new_object:any}>) => {
+                const {type, id, new_object} = action.payload;
+                let new_objects = {...state.selectedDayplan[type]}
+                for(let i in new_objects)
+                {
+                    if(new_objects[i].id === id)
+                    {
+                        new_objects[i] = new_object;
+                    }
+                }
+
+                state.selectedDayplan = {...state.selectedDayplan, [type]:new_objects}
+            },
         }
     }
 );
 
 export default dayplanSlice.reducer;
-export const {setSummary} = dayplanSlice.actions;
+export const {setSummary, setSelectedDayplan, updateSelectedDayplan} = dayplanSlice.actions;

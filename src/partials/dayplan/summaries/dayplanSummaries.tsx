@@ -15,7 +15,7 @@ const DayplanSummaries: React.FC<Props> = ({}) => {
     return (
         <div>
             {dayplans.length>0&&dayplans.map((dayplan)=>{
-                return <SummaryComponent dayplan={dayplan}/>
+                return <SummaryComponent key={dayplan.id} dayplan={dayplan}/>
             })
             }
         </div>
