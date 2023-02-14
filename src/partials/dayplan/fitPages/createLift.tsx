@@ -7,9 +7,10 @@ import { liftType} from "../dayplanSlice";
 
 type Props = {
     lift_to_edit?:liftType;
+    onSave: ()=>any;
 };
 
-const CreateLift: React.FC<Props> = ({lift_to_edit}) => {
+const CreateLift: React.FC<Props> = ({lift_to_edit, onSave}) => {
     const dispatch = useDispatch();
     const token = useSelector((state:RootState)=>state.auth.token);
     const selectedDayplan = useSelector((state:RootState)=>state.dayplan.selectedDayplan);
@@ -49,6 +50,51 @@ const CreateLift: React.FC<Props> = ({lift_to_edit}) => {
     }
 
     const [form, setForm] = useState(
+        lift_to_edit?
+        [
+            {
+                alias: 'Name',
+                key: 'name',
+                value: lift_to_edit.name,
+                component: (value,id, index)=>inputComponent(value, id, onTextChange, index)
+            },
+            {
+                alias: 'Description',
+                key: 'description',
+                value: lift_to_edit.description,
+                component: (value, id, index)=>inputComponent(value,id, onTextChange, index)
+            },
+            {
+                alias: 'Goal',
+                key: 'goal',
+                value: lift_to_edit.goal,
+                component: (value, id, index)=>inputComponent(value,id, onNumberChange, index)
+            },
+            {
+                alias: 'Complete',
+                key: 'complete',
+                value: lift_to_edit.complete,
+                component: (value, id, index)=>inputComponent(value,id, onNumberChange, index)
+            },
+            {
+                alias: 'Weight',
+                key: 'weight',
+                value: lift_to_edit.weight,
+                component: (value, id, index)=>inputComponent(value,id, onNumberChange, index)
+            },
+            {
+                alias: 'Reps',
+                key: 'reps',
+                value: lift_to_edit.reps,
+                component: (value, id, index)=>inputComponent(value, id, onNumberChange, index)
+            },
+            {
+                alias: 'Measurement',
+                key: 'measurement',
+                value: lift_to_edit.measurement,
+                component: (value, id, index)=>selectComponent(value, id, onTextChange, ["LB", "KG"], index)
+            },
+        ]:
         [
             {
                 alias: 'Name',
@@ -133,28 +179,35 @@ const CreateLift: React.FC<Props> = ({lift_to_edit}) => {
         else submit_form['id'] = -1;
 
         createFitObject(dispatch, selectedDayplan.id, token, 'lift', submit_form)
+        onSave();
     }
     return(
-        <Card>
-            <CardBody>
-                {
-                    form.map((form_field, index)=>{
-                        return<div key={form_field.key}>
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={'lift-'+form_field.key}>{form_field.alias}</label>
-                            {
-                                form_field.component(form_field.value, 'lift-'+form_field.key, index)
-                            }
-                        </div>
-                    })
-                }
+        <>
+            {
+                form.map((form_field, index)=>{
+                    return<div key={form_field.key}>
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={'lift-'+form_field.key}>{form_field.alias}</label>
+                        {
+                            form_field.component(form_field.value, 'lift-'+form_field.key, index)
+                        }
+                    </div>
+                })
+            }
+            <div className="flex gap-4">
+                <button 
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded focus:outline-none focus:shadow-outline" 
+                    type="button"
+                    onClick={()=>onSave()}>
+                    Cancel
+                </button>   
                 <button 
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded focus:outline-none focus:shadow-outline" 
                     type="button"
                     onClick={handleSubmit}>
                     Save
-                </button>                
-            </CardBody>
-        </Card>
+                </button> 
+            </div>    
+        </>
     )
 }
 
