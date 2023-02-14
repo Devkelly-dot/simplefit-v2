@@ -182,32 +182,34 @@ const CreateLift: React.FC<Props> = ({lift_to_edit, onSave}) => {
         onSave();
     }
     return(
-        <>
-            {
-                form.map((form_field, index)=>{
-                    return<div key={form_field.key}>
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={'lift-'+form_field.key}>{form_field.alias}</label>
-                        {
-                            form_field.component(form_field.value, 'lift-'+form_field.key, index)
-                        }
-                    </div>
-                })
-            }
-            <div className="flex gap-4">
-                <button 
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded focus:outline-none focus:shadow-outline" 
-                    type="button"
-                    onClick={()=>onSave()}>
-                    Cancel
-                </button>   
-                <button 
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded focus:outline-none focus:shadow-outline" 
-                    type="button"
-                    onClick={handleSubmit}>
-                    Save
-                </button> 
-            </div>    
-        </>
+        <Card>
+            <CardBody>
+                {
+                    form.map((form_field, index)=>{
+                        return<div key={form_field.key}>
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={'lift-'+form_field.key}>{form_field.alias}</label>
+                            {
+                                form_field.component(form_field.value, 'lift-'+form_field.key, index)
+                            }
+                        </div>
+                    })
+                }
+                <div className="flex gap-4">
+                    <button 
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded focus:outline-none focus:shadow-outline" 
+                        type="button"
+                        onClick={()=>onSave()}>
+                        Cancel
+                    </button>   
+                    <button 
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded focus:outline-none focus:shadow-outline" 
+                        type="button"
+                        onClick={handleSubmit}>
+                        Save
+                    </button> 
+                </div>   
+            </CardBody> 
+        </Card>
     )
 }
 

@@ -14,7 +14,7 @@ const LiftPage: React.FC<Props> = () => {
     return(
         <>
             {
-                creating?<CreateLift onSave={()=>setCreating(false)}/>:
+                creating?<div className="mb-12"><CreateLift onSave={()=>setCreating(false)}/></div>:
                 <button 
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded focus:outline-none focus:shadow-outline" 
                     type="button"
