@@ -51,7 +51,6 @@ const DayplanPage: React.FC<Props> = ({day}) => {
             dispatch(setSelectedDayplan(
                 res
             ))
-            console.log(res);
         }
 
         let id = null;
@@ -75,7 +74,7 @@ const DayplanPage: React.FC<Props> = ({day}) => {
     return(
         <>
             <h1>{dayName}</h1>
-            <div className="grid grid-cols-3">        
+            <div className="grid grid-cols-3 mb-12">        
                 <Link to={`/dashboard/${day}/lift`}>
                     <Card className={(type==='lift' || type===':type')?'bg-light-blue-500 text-white':""}>
                         <CardBody className="text-center">
