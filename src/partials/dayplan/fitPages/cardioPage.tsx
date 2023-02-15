@@ -17,7 +17,7 @@ const CardioPage: React.FC<Props> = () => {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded focus:outline-none focus:shadow-outline" 
                     type="button"
                     onClick={()=>setCreating(true)}>
-                    New Cardio
+                    Add Cardio
                 </button> 
             }
 

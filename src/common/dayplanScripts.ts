@@ -81,7 +81,11 @@ export async function createFitObject(dispatch, dayplanId, token, type, object)
     }
     else 
     {
-        const apiURL = `dayplan/lifts/${object.id}/update/`
+        let type_url = type;
+        if(type_url === 'lift')
+            type_url = 'lifts';
+
+        const apiURL = `dayplan/${type_url}/${object.id}/update/`
         const res = await authFetch('POST', {'Authorization':'Token '+token}, apiURL, object)
         new_object = res[0];
     }
