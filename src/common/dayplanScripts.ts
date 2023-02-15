@@ -88,7 +88,7 @@ export async function createFitObject(dispatch, dayplanId, token, type, object)
 
     dispatch(updateSelectedDayplan(
         {
-            type: 'lift',
+            type: type,
             id: new_object['id'],
             new_object: new_object
         }

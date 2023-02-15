@@ -24,11 +24,7 @@ const LiftCard: React.FC<Props> = ({lift}) => {
                     Edit
                 </button>  
             </CardBody>
-        </Card>:lift&&edit?<Card>
-            <CardBody>
-                <CreateLift lift_to_edit={lift} onSave = {()=>{setEdit(false)}}/>
-            </CardBody>
-        </Card>:<></>
+        </Card>:lift&&edit?<CreateLift lift_to_edit={lift} onSave = {()=>{setEdit(false)}}/>:<></>
     )
 }
 
