@@ -1,4 +1,4 @@
-import { updateSelectedDayplan } from "@/partials/dayplan/dayplanSlice";
+import { deleteFromDayplan, updateSelectedDayplan } from "@/partials/dayplan/dayplanSlice";
 import { authFetch } from "./authFetch"
 
 export async function getDayplans(token:string)
@@ -95,6 +95,26 @@ export async function createFitObject(dispatch, dayplanId, token, type, object)
             type: type,
             id: new_object['id'],
             new_object: new_object
+        }
+    ))
+}
+
+export async function deleteFitObject(dispatch, token, type, object)
+{
+    let new_object = {};
+    
+    let type_url = type;
+    if(type_url === 'lift')
+        type_url = 'lifts';
+
+    const apiURL = `dayplan/${type_url}/${object.id}/delete/`
+    const res = await authFetch('POST', {'Authorization':'Token '+token}, apiURL, {})
+    new_object = res[0];
+    
+    dispatch(deleteFromDayplan(
+        {
+            type: type,
+            id: object['id']
         }
     ))
 }

@@ -143,9 +143,30 @@ export const dayplanSlice = createSlice(
 
                 state.selectedDayplan = {...state.selectedDayplan, [type]:new_objects}
             },
+            deleteFromDayplan: (state, action: PayloadAction<{type: string, id: number}>) => {
+                const {type, id} = action.payload;
+                let new_dayplan = {...state.selectedDayplan}
+                let new_objects = new_dayplan[type]
+                let found_flag = false;
+
+                for(let i in new_objects)
+                {
+                    if(new_objects[i].id === id)
+                    {
+                        new_objects.splice(i, 1);
+                        found_flag = true;
+                        break;
+                    }
+                }
+                
+                if(found_flag)
+                    return;
+
+                state.selectedDayplan = {...state.selectedDayplan, [type]:new_objects}
+            },
         }
     }
 );
 
 export default dayplanSlice.reducer;
-export const {setSummary, setSelectedDayplan, updateSelectedDayplan} = dayplanSlice.actions;
+export const {setSummary, setSelectedDayplan, updateSelectedDayplan, deleteFromDayplan} = dayplanSlice.actions;
