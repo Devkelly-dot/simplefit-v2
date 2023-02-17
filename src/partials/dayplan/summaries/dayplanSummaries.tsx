@@ -13,7 +13,7 @@ const DayplanSummaries: React.FC<Props> = ({}) => {
     },[dayplans])
 
     return (
-        <div>
+        <div className="flex flex-col gap-2">
             {dayplans.length>0&&dayplans.map((dayplan)=>{
                 return <SummaryComponent key={dayplan.id} dayplan={dayplan}/>
             })

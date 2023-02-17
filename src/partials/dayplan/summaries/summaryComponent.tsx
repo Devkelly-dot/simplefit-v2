@@ -11,7 +11,7 @@ const SummaryComponent: React.FC<Props> = ({dayplan}) => {
     const day_name = getDayName(dayplan.day);
     return (
         <Link to={`/dashboard/${dayplan.day}/lift`}>
-            <Card>
+            <Card  className="hover:bg-blue-300 hover:text-white ease-in-out duration-200 hover:-translate-y-1">
                 <CardBody>
                     <h2 className="text-lg">{day_name}</h2>
                     <h3>{dayplan.eaten} / {dayplan.goal} calories</h3>
