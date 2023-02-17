@@ -32,3 +32,10 @@ export async function loginUser(username, token, id, remember, dispatch)
         ))
       });
 }
+
+export async function logoutUser()
+{
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userName");
+    location.reload();
+}

@@ -19,6 +19,7 @@ import {
   ClockIcon,
   CreditCardIcon,
   Bars3Icon,
+  ArrowRightOnRectangleIcon
 } from "@heroicons/react/24/solid";
 import {
   useMaterialTailwindController,
@@ -28,6 +29,7 @@ import {
 
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { logoutUser } from "@/common/login";
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -88,23 +90,41 @@ export function DashboardNavbar() {
           >
             <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
           </IconButton>
-          {userName?<Link to="profile">
+          {userName?<div className="flex items-center">
+            <Link to="/">
+              <Button
+                variant="text"
+                color="blue-gray"
+                className="hidden items-center gap-1 px-4 xl:flex"
+              >
+                <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
+                  {userName}
+              </Button>
+              <IconButton
+                variant="text"
+                color="blue-gray"
+                className="grid xl:hidden"
+              >
+                <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
+              </IconButton>
+            </Link>
             <Button
-              variant="text"
-              color="blue-gray"
-              className="hidden items-center gap-1 px-4 xl:flex"
-            >
-              <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-                {userName}
+                variant="text"
+                color="blue-gray"
+                className="hidden items-center gap-1 px-4 xl:flex"
+                onClick={logoutUser}
+              >
+                <ArrowRightOnRectangleIcon className="h-5 w-5 text-blue-gray-500" />
+                  Logout
             </Button>
             <IconButton
-              variant="text"
-              color="blue-gray"
-              className="grid xl:hidden"
-            >
-              <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
+                variant="text"
+                color="blue-gray"
+                className="grid xl:hidden"
+              >
+                <ArrowRightOnRectangleIcon className="w-5 h-5 text-black"/>
             </IconButton>
-          </Link>:
+          </div>:
           <Link to="/auth/sign-in">
             <Button
               variant="text"
