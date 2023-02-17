@@ -18,9 +18,7 @@ export function Dashboard() {
     <div className="min-h-screen bg-blue-gray-50/50">
       <Sidenav
         routes={routes}
-        brandImg={
-          sidenavType === "dark" ? "/img/logo-ct.png" : "/img/logo-ct-dark.png"
-        }
+        brandName = "Note Fitness"
       />
       <div className="p-4 xl:ml-80">
         <DashboardNavbar />

@@ -8,6 +8,9 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
+import {
+  PencilSquareIcon,
+} from "@heroicons/react/24/solid";
 
 export function Sidenav({ brandImg, brandName, routes }) {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -16,6 +19,9 @@ export function Sidenav({ brandImg, brandName, routes }) {
     dark: "bg-gradient-to-br from-blue-gray-800 to-blue-gray-900",
     white: "bg-white shadow-lg",
     transparent: "bg-transparent",
+  };
+  const icon = {
+    className: "w-6 h-6 text-white",
   };
 
   return (
@@ -30,7 +36,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
         }`}
       >
         <Link to="/" className="flex items-center gap-4 py-6 px-8">
-          <Avatar src={brandImg} size="sm" />
+          <PencilSquareIcon {...icon}/>
           <Typography
             variant="h6"
             color={sidenavType === "dark" ? "white" : "blue-gray"}
