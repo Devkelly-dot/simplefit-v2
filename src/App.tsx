@@ -20,7 +20,7 @@ function App() {
     {
       loginUser(userName, authToken, null, true, dispatch);
     }
-    else if(location.pathname!=='/auth/sign-up' && location.pathname!=='/auth/sign-in')
+    else if(location.pathname!=='/auth/sign-up' && location.pathname!=='/auth/sign-in' && !token)
     {
       navigate('/auth/sign-in');
     }

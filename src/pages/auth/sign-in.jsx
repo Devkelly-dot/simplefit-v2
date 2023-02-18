@@ -1,14 +1,3 @@
-import { Link } from "react-router-dom";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
 import SigninComponent from "@/partials/auth/signin-component";
 
 export function SignIn() {

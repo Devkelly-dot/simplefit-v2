@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import {
-  ChartPieIcon,
-  UserIcon,
   UserPlusIcon,
   ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/solid";
@@ -10,16 +8,6 @@ import routes from "@/routes";
 
 export function Auth() {
   const navbarRoutes = [
-    {
-      name: "dashboard",
-      path: "/dashboard/home",
-      icon: ChartPieIcon,
-    },
-    {
-      name: "profile",
-      path: "/dashboard/home",
-      icon: UserIcon,
-    },
     {
       name: "sign up",
       path: "/auth/sign-up",
@@ -35,7 +23,7 @@ export function Auth() {
   return (
     <div className="relative min-h-screen w-full">
       <div className="container relative z-40 mx-auto p-4">
-        <Navbar routes={navbarRoutes} />
+        <Navbar routes={navbarRoutes} brandName='Note Fitness'/>
       </div>
       <Routes>
         {routes.map(
