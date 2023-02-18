@@ -57,7 +57,8 @@ export function Sidenav({ brandImg, brandName, routes }) {
       </div>
       <div className="m-4">
         {routes.map(({ layout, title, pages }, key) => (
-          <ul key={key} className="mb-4 flex flex-col gap-1">
+          <>
+          {title!=="auth pages"&&<ul key={key} className="mb-4 flex flex-col gap-1">
             {title && (
               <li className="mx-3.5 mt-4 mb-2">
                 <Typography
@@ -97,7 +98,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
                 </NavLink>
               </li>
             ))}
-          </ul>
+          </ul>}</>
         ))}
       </div>
     </aside>
