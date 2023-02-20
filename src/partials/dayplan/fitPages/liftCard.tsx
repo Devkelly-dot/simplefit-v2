@@ -24,6 +24,7 @@ const LiftCard: React.FC<Props> = ({lift}) => {
                     editField = 'complete'
                     goalField= 'goal'
                     type = 'lift'
+                    title='sets'
                 />
                 <h3>{lift.description}</h3>
                 <div className="flex gap-2">

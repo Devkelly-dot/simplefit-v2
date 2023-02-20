@@ -3,6 +3,7 @@ import { cardioType } from "../dayplanSlice";
 import { useState } from "react";
 import CreateCardio from "./createCardio";
 import DeleteFitCard from "./deleteFitCard";
+import EditableNumField from "./components/editableNumField";
 
 type Props = {
     cardio?:cardioType;
@@ -17,7 +18,13 @@ const CardioCard: React.FC<Props> = ({cardio}) => {
         cardio&&!edit?<Card>
             <CardBody>
                 <h2>{cardio.name}</h2>
-                <h3>{cardio.complete} / {cardio.goal} {cardio.measurement}</h3>
+                <EditableNumField
+                    object = {cardio}
+                    editField = 'complete'
+                    goalField= 'goal'
+                    type = 'cardio'
+                    title= {cardio.measurement==='MN'?'minutes':'miles'}
+                />
                 <h3>{cardio.description}</h3>
                 <div className="flex gap-2">
                     <button 
