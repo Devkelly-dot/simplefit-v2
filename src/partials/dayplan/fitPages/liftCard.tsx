@@ -3,6 +3,7 @@ import { liftType } from "../dayplanSlice";
 import { useState } from "react";
 import CreateLift from "./createLift";
 import DeleteFitCard from "./deleteFitCard";
+import EditableNumField from "./components/editableNumField";
 
 type Props = {
     lift?:liftType;
@@ -18,7 +19,12 @@ const LiftCard: React.FC<Props> = ({lift}) => {
             <CardBody>
                 <h2>{lift.name} {lift.reps} reps</h2>
                 <h3>{lift.weight} {lift.measurement}</h3>
-                <h3>{lift.complete} / {lift.goal} sets</h3>
+                <EditableNumField
+                    object = {lift}
+                    editField = 'complete'
+                    goalField= 'goal'
+                    type = 'lift'
+                />
                 <h3>{lift.description}</h3>
                 <div className="flex gap-2">
                     <button 
