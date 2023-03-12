@@ -19,11 +19,11 @@ function App() {
 
     if(authToken&&userName)
     {
-      loginUser(userName, authToken, null, true, dispatch);
+      loginUser(userName, authToken, null, false, dispatch);
     }
     else if(token && loggedInUser)
     {
-      loginUser(loggedInUser, token, null, true, dispatch);
+      loginUser(loggedInUser, token, null, false, dispatch);
     }
     else if(location.pathname!=='/auth/sign-up' && location.pathname!=='/auth/sign-in' && !token)
     {
