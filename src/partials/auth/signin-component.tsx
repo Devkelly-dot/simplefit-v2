@@ -34,7 +34,7 @@ const SigninComponent: React.FC<Props> = () => {
     {
         try {
           const res = await authFetch('POST',{},'dayplan/users/login/',form);
-          const authToken = res?.token;
+          const authToken = res[0]?.token;
 
           if(res.Error)
           {

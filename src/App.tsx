@@ -11,6 +11,7 @@ function App() {
   const location = useLocation();
 
   const token = useSelector((state:RootState)=>state.auth.token);
+  const loggedInUser = useSelector((state:RootState)=>state.auth.username);
 
   useEffect(()=>{
     const authToken = localStorage.getItem('authToken');
@@ -20,11 +21,16 @@ function App() {
     {
       loginUser(userName, authToken, null, true, dispatch);
     }
+    else if(token && loggedInUser)
+    {
+      loginUser(loggedInUser, token, null, true, dispatch);
+    }
     else if(location.pathname!=='/auth/sign-up' && location.pathname!=='/auth/sign-in' && !token)
     {
       navigate('/auth/sign-in');
     }
-  },[location])
+    
+  },[location, token, loggedInUser]);
 
   return (
     <Routes>
