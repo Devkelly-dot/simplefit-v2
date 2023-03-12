@@ -40,7 +40,7 @@ const RegisterComponent: React.FC<Props> = () => {
 
         const res = await authFetch('POST',{},'dayplan/users/register/',submit_form);
         const loginForm = {
-            username:res[0]?.username,
+            username_or_email:res[0]?.username,
             password:form?.password
         }
         if(res.Error)

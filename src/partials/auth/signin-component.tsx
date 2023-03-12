@@ -23,7 +23,7 @@ const SigninComponent: React.FC<Props> = () => {
 
     const [form, setForm] = useState(
         {
-            username:'',
+            username_or_email:'',
             password:'',
         }
     )
@@ -49,7 +49,7 @@ const SigninComponent: React.FC<Props> = () => {
               return;
           }
 
-          loginUser(form['username'], authToken, null, rememberMe, dispatch);
+          loginUser(form['username_or_email'], authToken, null, rememberMe, dispatch);
 
           navigate('/dashboard/home');
         } catch (error) {
@@ -90,7 +90,7 @@ const SigninComponent: React.FC<Props> = () => {
 
           <CardBody className="flex flex-col gap-4">
             <AlertList alerts = {alerts} removeAlert={removeAlert}/>
-            <Input type="username" label="Username" size="lg" value={form['username']} onChange={(e)=>handleFormChange(e,'username')}/>
+            <Input type="username" label="Username or Email" size="lg" value={form['username_or_email']} onChange={(e)=>handleFormChange(e,'username_or_email')}/>
             <Input type="password" label="Password" size="lg" value={form['password']} onChange={(e)=>handleFormChange(e,'password')}/>
             <div className="-ml-2.5">
               <Checkbox label="Remember Me" checked={rememberMe} onChange={(e)=>setRememberMe(e.target.checked)}/>
