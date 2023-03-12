@@ -57,7 +57,7 @@ const RegisterComponent: React.FC<Props> = () => {
         }
 
         const loginRes = await authFetch('POST',{},'dayplan/users/login/',loginForm);
-        const authToken = loginRes?.token;
+        const authToken = loginRes[0]?.token;
 
         dispatch(setAuth(
             {
