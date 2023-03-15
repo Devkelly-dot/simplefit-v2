@@ -94,7 +94,7 @@ const SigninComponent: React.FC<Props> = () => {
             <AlertList alerts = {alerts} removeAlert={removeAlert}/>
             <Input type="username" label="Username or Email" size="lg" value={form['username_or_email']} onChange={(e)=>handleFormChange(e,'username_or_email')}/>
             <div className="relative">
-              <Input type={showPass?`password`:'text'} label="Password" size="lg" value={form['password']} onChange={(e)=>handleFormChange(e,'password')} className="pr-10"/>
+              <Input type={!showPass?`password`:'text'} label="Password" size="lg" value={form['password']} onChange={(e)=>handleFormChange(e,'password')} className="pr-10"/>
 
               <div
                   color="blue-gray"
