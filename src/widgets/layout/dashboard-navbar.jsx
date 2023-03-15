@@ -119,7 +119,13 @@ export function DashboardNavbar() {
                 color="blue-gray"
                 className="grid xl:hidden"
               >
+                <Button
+                variant="text"
+                color="blue-gray"
+                onClick={logoutUser}
+              >
                 <ArrowRightOnRectangleIcon className="w-5 h-5 text-black"/>
+              </Button>
             </IconButton>
           </div>:
           <Link to="/auth/sign-in">
