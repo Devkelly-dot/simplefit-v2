@@ -1,4 +1,4 @@
-import { Card, CardHeader, Typography, Input, CardBody, Checkbox, CardFooter, Button } from "@material-tailwind/react";
+import { Card, CardHeader, Typography, Input, CardBody, Checkbox, CardFooter, Button, IconButton } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import { authFetch } from "@/common/authFetch";
 import { useState } from "react";
@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setAuth } from "./authSlice";
 import AlertList from "../alertList";
 import { loginUser } from "@/common/login";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 interface Props {
 }
@@ -20,6 +21,7 @@ const SigninComponent: React.FC<Props> = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [alerts, setAlerts] = useState<alert[]>([]);
+    const [showPass, setShowPass] = useState(false);
 
     const [form, setForm] = useState(
         {
@@ -91,7 +93,18 @@ const SigninComponent: React.FC<Props> = () => {
           <CardBody className="flex flex-col gap-4">
             <AlertList alerts = {alerts} removeAlert={removeAlert}/>
             <Input type="username" label="Username or Email" size="lg" value={form['username_or_email']} onChange={(e)=>handleFormChange(e,'username_or_email')}/>
-            <Input type="password" label="Password" size="lg" value={form['password']} onChange={(e)=>handleFormChange(e,'password')}/>
+            <div className="relative">
+              <Input type={showPass?`password`:'text'} label="Password" size="lg" value={form['password']} onChange={(e)=>handleFormChange(e,'password')} className="pr-10"/>
+
+              <div
+                  color="blue-gray"
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                  onClick={()=>{setShowPass(!showPass)}}
+                >
+                  {showPass?<EyeSlashIcon className="w-5 h-5 text-black"/>:<EyeIcon className="w-5 h-5 text-black"/>}
+              </div>
+
+            </div>
             <div className="-ml-2.5">
               <Checkbox label="Remember Me" checked={rememberMe} onChange={(e)=>setRememberMe(e.target.checked)}/>
             </div>
